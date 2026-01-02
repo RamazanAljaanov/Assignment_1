@@ -71,13 +71,31 @@ public class Course {
         return cnt;
     }
 
+    // Get course capacity (array size)
+    public int getCapacity() {
+        return students.length;
+    }
+
     // toString: summary with student list (compact)
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Course{name='").append(courseName).append("', instructor='").append(instructor).append("', ");
-        sb.append("capacity=").append(students.length).append(", enrolled=").append(enrolledCount()).append(", ");
-        sb.append(String.format("averageGPA=%.2f", courseAverageGPA())).append("}\n");
+        sb.append("capacity=").append(students.length);
+        
+        // Single pass through array to calculate enrolled count and average GPA
+        int enrolled = 0;
+        double gpaSum = 0.0;
+        for (Student s : students) {
+            if (s != null) {
+                enrolled++;
+                gpaSum += s.getGpa();
+            }
+        }
+        double avgGpa = enrolled == 0 ? 0.0 : gpaSum / enrolled;
+        
+        sb.append(", enrolled=").append(enrolled).append(", ");
+        sb.append(String.format("averageGPA=%.2f", avgGpa)).append("}\n");
         sb.append("Students:\n");
         for (int i = 0; i < students.length; i++) {
             sb.append("  [").append(i).append("] ");

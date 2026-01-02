@@ -195,7 +195,7 @@ public class Main {
                         System.out.println("Student not found in array.");
                         break;
                     }
-                    System.out.print("Enter index in course (0 .. " + (course.getStudents().length - 1) + "): ");
+                    System.out.print("Enter index in course (0 .. " + (course.getCapacity() - 1) + "): ");
                     String idxStr = scanner.nextLine().trim();
                     try {
                         int cIndex = Integer.parseInt(idxStr);
